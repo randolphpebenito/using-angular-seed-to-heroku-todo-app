@@ -1,8 +1,83 @@
-<p>This is the partial for view 1.</p>
-<p>{{ hello }}</p>
+<div class="search">
+    <input type"text" placeholder="Todo Live Search.." class="form-control" ng-model="todo.search">
+</div>
 
-<ul>
-<li ng-repeat="todo in todos">
-	{{ todo.title }}
-</li>
+<div class="panel panel-default">
+  <div class="panel-heading">
+	<h3 class='text-center'>Todo App | Randolph Pe Benito</h3>
+  </div> <!-- panel-heading -->
+
+   <div class="panel-body">
+	<form>
+		  <div class="input-group input-group-lg">
+			  <input type="text" class="form-control" ng-model='newTodo' placeholder="Add todo..">
+			  <span class="input-group-btn">
+				<button class="btn btn-success" ng-click="addTodo()">
+					<i class="fa fa-plus" aria-hidden="true"></i>
+				</button>
+			  </span>
+		  </div>
+	</form>
+  </div> <!-- panel-body -->
+<ul class="list-group">
+    <li dir-paginate="todo in todos | filter: todo.search | itemsPerPage: 5 as todoItems" class="list-group-item well" pagination-id="todo-content">
+		<div class="checkbox">
+			<input id="checkbox3" type="checkbox" ng-model="todo.completed" ng-change="updateTodoStatus(todo)">
+			<label for="checkbox3">
+			<div ng-if="todo.completed" class=""><s>{{ todo.title }}</s></div>
+			<div ng-if="todo.completed === false" class="">{{ todo.title }}</div>
+
+			</label>
+			<div class="most-right">
+				<button class="btn btn-primary"
+				data-toggle="modal"
+				data-target="#todo-info"
+				ng-click="viewEditTodo(todo.id, $index)">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-danger"
+                    ng-click="removeTodo(todo.id, { isModal: false, index:$index })">
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</button>
+			</div><!-- most-right -->
+		</div> <!-- checkbox -->
+    </li>
 </ul>
+<span ng-if='todoItems.length == 0'>No Todos Found</span>
+<div class='col-sm-6 col-sm-offset-4'>
+<dir-pagination-controls ng-hide='todo.search.length > 0' pagination-id="todo-content"></dir-pagination-controls>
+</div>
+
+</div><!-- panel default -->
+
+<div class="modal" id="todo-info">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">Edit Todo</h4>
+		</div>
+		<div class="modal-body">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" ng-model='todo.title'>
+            </div>
+			<div class="checkbox">
+               <input id="checkbox3" type="checkbox" ng-model='todo.completed'>
+               <label for="checkbox">Completed</label>
+		  	</div>
+            <div class="form-group">
+                <label>Note</label>
+                <textarea class="form-control" rows="3" ng-model='todo.note'></textarea>
+            </div>
+	    </div>
+        <div class="modal-footer">
+			<div class="most-right">
+                <button class="btn btn-primary" ng-click="updateTodo(todo, todoIndex)">Edit</button>
+                <button class="btn btn-danger" ng-click="removeTodo(todo.id, { isModal: true, index: todoIndex })">Remove</button>
+            </div>
+        </div>
+	  </div>
+	</div>
+</div>
+
