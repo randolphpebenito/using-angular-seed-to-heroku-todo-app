@@ -27,6 +27,10 @@ body {
 .most-right {
 	float: right;
 	padding-right: 10px;
+}
 
-
+.search {
+    width: 40%;
+    margin-left: 334px;
+    margin-bottom: 10px;
 }
