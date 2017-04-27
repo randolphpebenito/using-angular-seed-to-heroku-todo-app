@@ -6,7 +6,8 @@ This app doesn't do much, just shows how to wire the front end (AngularJS) and b
 
 ## Getting Started
 
-To get you started you can simply clone this repository and install the dependencies:
+To get you started you can simply clone this repository and install the dependencies:   
+Click here for [Heroku Demo](http://intellij-todo-app-randolph.herokuapp.com/#/) 
 
 ### Clone `using-angular-seed-to-heroku-todo-app`
 
