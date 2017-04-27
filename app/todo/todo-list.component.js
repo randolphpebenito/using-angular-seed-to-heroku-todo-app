@@ -29,13 +29,17 @@ angular
             //Update Todo Status
             $scope.updateTodoStatus = function(todo) {
                 Todo.update({id: todo.id}, todo, function(){
-                    console.log("Success");
+                    console.log("Success Checkbox Update!");
                 });
             }  
 
             //Update Todo Details
-            $scope.updateTodo = function(todo_id) {
-                $scope.todo = Todo.get({ id: todo_id });
+            $scope.updateTodo = function(todo, index) {
+                Todo.update({id: todo.id}, todo, function(data){
+                    console.log("Success Modal Update!");
+                    $scope.todos[index] = angular.copy(data);
+                    angular.element('#todo-info').modal('hide');
+                });
             }  
 
             //Delete Todo
@@ -46,8 +50,6 @@ angular
                     }
                     $scope.todos.splice(data.index, 1);
                 });
-
-                
             }
         }
 
