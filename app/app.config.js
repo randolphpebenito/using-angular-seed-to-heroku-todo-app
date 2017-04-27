@@ -5,7 +5,9 @@ angular
     .module('todoApp')
     .config(RouteConfig);
 
-    function RouteConfig($routeProvider) {
+    function RouteConfig($routeProvider, $resourceProvider) {
+        $resourceProvider.defaults.stripTrailingSlashes = false;
+
 		$routeProvider
 			.when('/', {
 				template: "<todo-list></todo-list>",
